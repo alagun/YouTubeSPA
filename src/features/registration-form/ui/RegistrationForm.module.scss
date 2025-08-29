@@ -1,0 +1,42 @@
+.registrationForm {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 24px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  :global {
+    .ant-form-item {
+      margin-bottom: 16px;
+    }
+
+    .ant-form-item-label {
+      font-weight: 500;
+    }
+
+    .ant-input,
+    .ant-picker,
+    .ant-radio-group {
+      border-radius: 6px;
+    }
+
+    .ant-btn {
+      width: 100%;
+      height: 40px;
+      border-radius: 6px;
+      font-weight: 500;
+      margin-top: 8px;
+    }
+  }
+}
+
+// Адаптивность
+@media (max-width: 576px) {
+  .registrationForm {
+    padding: 16px;
+    margin: 0 16px;
+    box-shadow: none;
+    border: 1px solid #d9d9d9;
+  }
+}
