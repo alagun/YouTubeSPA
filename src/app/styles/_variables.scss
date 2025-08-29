@@ -1,0 +1,78 @@
+@mixin export-variables {
+  --font-family-main: Manrope, "Times New Roman", Serif;
+
+  // S
+  --font-size-s: 0.75rem; // Размер шрифта
+  --font-line-s: 0.9rem;
+  --font-s: var(--font-size-s) / var(--font-line-s) var(--font-family-main);
+
+  // M
+  --font-size-m: 1rem; // Размер шрифта
+  --font-line-m: 1.25rem;
+  --font-m: var(--font-size-m) / var(--font-line-m) var(--font-family-main);
+
+  // L
+  --font-size-l: 1.2rem; // Размер шрифта
+  --font-line-l: 1.5rem;
+  --font-l: var(--font-size-l) / var(--font-line-l) var(--font-family-main);
+
+  // XL
+  --font-size-xl: 1.5rem; // Размер шрифта
+  --font-line-xl: 1.8rem;
+  --font-xl: var(--font-size-xl) / var(--font-line-xl) var(--font-family-main);
+
+  // text weight
+  --font-weight-800: 800;
+  --font-weight-700: 700;
+  --font-weight-600: 600;
+  --font-weight-500: 500;
+  --font-weight-400: 400;
+
+  // Темы
+  --theme-light: 255, 255, 255;
+  --theme-dark: 20, 20, 20;
+
+  // Анимация transition: <duration timing-fn>
+  --transition-duration: 0.3s;
+  --transition-timing-fn: ease-in-out;
+
+  // Непрозрачность. Используется в rgba(0,0,0,50%)
+  --transparency-6: 6%;
+  --transparency-10: 10%;
+  --transparency-25: 25%;
+  --transparency-40: 40%;
+  --transparency-45: 45%;
+  --transparency-47: 47%;
+  --transparency-50: 50%;
+  --transparency-65: 65%;
+  --transparency-67: 67%;
+  --transparency-75: 75%;
+  --transparency-85: 85%;
+  --transparency-87: 87%;
+  --transparency-93: 93%;
+  --transparency-97: 97%;
+  --transparency-100: 100%;
+
+  // Размеры
+  --height-navbar: 100px;
+  --height-btn-S: 40px;
+  --width-btn-S: 200px;
+  --height-btn-M: 40px;
+  --width-btn-M: 200px;
+  --height-btn-L: 60px;
+  --width-btn-L: 290px;
+  --width-wrapper-start: 684px;
+  --height-wrapper-start: 680px;
+  --width-tooltip: 210px;
+  --height-tooltip: 48px;
+
+  // Colors
+  --primary-btn: 22, 119, 255;
+  --primary-gray: #f8f8f8;
+  --primary-font: #3c3c3c;
+  --gray-font: #0000004D;
+  --warn-font: #F86627;
+  --error-font: #ED4337;
+  --primary-hover: #ccc;
+  --border-gray: #D9D9D9;
+}
