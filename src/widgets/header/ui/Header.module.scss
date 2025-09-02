@@ -1,0 +1,96 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  background: #001529;
+  height: 64px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 24px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.logoIcon {
+  font-size: 20px;
+  color: #ff4d4f;
+}
+
+.menu {
+  flex: 1;
+  border-bottom: none;
+  background: transparent;
+  min-width: 200px;
+}
+
+.userButton {
+  color: #fff;
+  padding: 4px 8px;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.userName {
+  margin-left: 8px;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 0 16px;
+  }
+  
+  .logo {
+    font-size: 16px;
+    margin-right: 16px;
+    
+    span {
+      display: none;
+    }
+  }
+  
+  .menu {
+    min-width: auto;
+    
+    .ant-menu-item {
+      padding: 0 8px;
+    }
+  }
+  
+  .userName {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 0 12px;
+  }
+  
+  .menu {
+    display: none;
+  }
+  
+  .logo {
+    margin-right: 0;
+    
+    span {
+      display: inline;
+      font-size: 14px;
+    }
+  }
+}
