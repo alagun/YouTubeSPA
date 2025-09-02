@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { authApi } from '../../shared/api/authApi'
 import { youtubeApi } from '../../shared/api/youtubeApi'
 import authSlice from '../../entities/user/model/authSlice'
-// import searchSlice from '../../features/search/model/searchSlice';
+import searchSlice from '../../features/search/model/searchSlice'
 // import savedQueriesSlice from '../../features/saved-queries/model/savedQueriesSlice';
 
 export const store = configureStore({
@@ -10,7 +10,7 @@ export const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     [youtubeApi.reducerPath]: youtubeApi.reducer,
     auth: authSlice,
-    // search: searchSlice,
+    search: searchSlice,
     // savedQueries: savedQueriesSlice,
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware({
