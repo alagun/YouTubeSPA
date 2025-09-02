@@ -18,10 +18,7 @@ export const AuthPage: React.FC = () => {
   const onFinish = async (values: { email: string; password: string }) => {
     try {
       dispatch(setLoading(true))
-      console.log('values, ', values)
       const response = await login(values).unwrap()
-
-      console.log(response)
 
       dispatch(setCredentials({
         user: response.user,
@@ -34,6 +31,7 @@ export const AuthPage: React.FC = () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error('Login failed:', error?.data?.errors)
+
       if (error.status === 401) {
         message.error('Неверный логин или пароль')
       } else {
