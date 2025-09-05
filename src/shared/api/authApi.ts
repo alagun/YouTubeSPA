@@ -1,13 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { API_LOGIN_URL, API_REGISTER_URL, API_URL } from '../config/api'
+import { API_LOGIN_URL, API_REGISTER_URL, API_URL, API_USERS_URL } from '../config/api'
 import type { TRegistrationForm } from '../../features/registration-form/models/registration'
+import { IUser } from '@/entities/user/model/authSlice'
 
 export interface IAuthResponse {
-  accessToken: string;
-  user: {
-    id: string;
-    login: string;
-  };
+  token: string;
 }
 
 export interface IAuthRequest {
@@ -42,7 +39,13 @@ export const authApi = createApi({
         body: credentials,
       }),
     }),
+    getUser: builder.query<IUser[], void>({
+      query: () => ({
+        url: API_USERS_URL,
+        method: 'GET',
+      }),
+    }),
   }),
 })
 
-export const { useLoginMutation, useRegisterMutation } = authApi
+export const { useLoginMutation, useRegisterMutation, useGetUserQuery, useLazyGetUserQuery } = authApi

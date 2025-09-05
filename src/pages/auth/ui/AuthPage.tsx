@@ -1,31 +1,58 @@
 import React from 'react'
-import { Form, Input, Button, Card, Typography, message, Alert } from 'antd'
+import { Form, Input, Button, Card, Typography, Alert } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { Link, useNavigate } from 'react-router-dom'
-import { useLoginMutation } from '../../../shared/api/authApi'
+import { useLazyGetUserQuery, useLoginMutation } from '../../../shared/api/authApi'
 import styles from './AuthPage.module.scss'
 import { setCredentials, setLoading } from '../../../entities/user/model/authSlice'
 import { useAppDispatch } from '../../../app/store/store.hooks'
 
 const { Title, Text } = Typography
 
+function removeFirstDot (email: string): string {
+  const dotIndex = email.indexOf('.')
+
+  if (dotIndex === -1) {
+    return email
+  }
+
+  return email.slice(0, dotIndex) + email.slice(dotIndex + 1)
+}
+
 export const AuthPage: React.FC = () => {
   const [form] = Form.useForm()
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const [login, { isLoading }] = useLoginMutation()
+  const [getUserData] = useLazyGetUserQuery()
 
   const onFinish = async (values: { email: string; password: string }) => {
     try {
       dispatch(setLoading(true))
       const response = await login(values).unwrap()
 
-      dispatch(setCredentials({
-        user: response.user,
-        token: response.accessToken,
-      }))
+      try {
+        const userDataResponse = await getUserData().unwrap()
 
-      message.success('Успешный вход!')
+        const User = userDataResponse.find(item => item.email === removeFirstDot(values.email))
+
+        dispatch(setCredentials({
+          user: {
+            id:  User?.id ? User.id : '0',
+            username: User?.username ? User.username : 'Jane Doe',
+            email: User?.email ? User.email : 'JaneDoe@example.com', // values.email
+            age: User?.age ? User.age : 0,
+            gender: User?.gender ? User.gender : 'unknowm',
+          },
+          token: response.token,
+        }))
+
+        localStorage.setItem('token', response.token)
+
+      } catch (userError) {
+        console.error('Failed to fetch user data:', userError)
+      }
+
       navigate('/', { replace: true })
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -33,9 +60,9 @@ export const AuthPage: React.FC = () => {
       console.error('Login failed:', error?.data?.errors)
 
       if (error.status === 401) {
-        message.error('Неверный логин или пароль')
+        console.error('Неверный логин или пароль')
       } else {
-        message.error('Ошибка при входе. Попробуйте позже.')
+        console.error('Ошибка при входе. Попробуйте позже.')
       }
     } finally {
       dispatch(setLoading(false))
@@ -61,6 +88,10 @@ export const AuthPage: React.FC = () => {
           layout='vertical'
           className={styles.authForm}
           size='large'
+          initialValues={{
+            email: 'alexej.lagun@gmail.com',
+            password: 'registerR1"',
+          }}
         >
           <Form.Item
             name='email'
