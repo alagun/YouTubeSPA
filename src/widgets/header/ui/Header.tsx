@@ -43,7 +43,7 @@ export const AppHeader: React.FC = () => {
   const userMenuItems = [
     {
       key: 'user-info',
-      label: `Пользователь: ${user?.login || 'Гость'}`,
+      label: `Пользователь: ${user?.username || 'Гость'}`,
       disabled: true,
     },
     {
@@ -86,7 +86,7 @@ export const AppHeader: React.FC = () => {
         <Button type='text' className={styles.userButton}>
           <Space>
             <Avatar size='small' icon={<UserOutlined />} />
-            <span className={styles.userName}>{user?.login}</span>
+            <span className={styles.userName}>{user?.username}</span>
           </Space>
         </Button>
       </Dropdown>
