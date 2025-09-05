@@ -43,7 +43,15 @@ export const AppHeader: React.FC = () => {
   const userMenuItems = [
     {
       key: 'user-info',
-      label: `Пользователь: ${user?.username || 'Гость'}`,
+      label: `Пользователь: ${user?.username || (() => {
+        try {
+          const userData = localStorage.getItem('user')
+
+          return userData ? JSON.parse(userData).username : 'Гость'
+        } catch {
+          return 'Гость'
+        }
+      })() || 'Гость'}`,
       disabled: true,
     },
     {
@@ -86,7 +94,17 @@ export const AppHeader: React.FC = () => {
         <Button type='text' className={styles.userButton}>
           <Space>
             <Avatar size='small' icon={<UserOutlined />} />
-            <span className={styles.userName}>{user?.username}</span>
+            <span className={styles.userName}>
+              {user?.username || (() => {
+                try {
+                  const userData = localStorage.getItem('user')
+
+                  return userData ? JSON.parse(userData).username : 'Гость'
+                } catch {
+                  return 'Гость'
+                }
+              })()}
+            </span>
           </Space>
         </Button>
       </Dropdown>

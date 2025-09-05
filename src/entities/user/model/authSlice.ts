@@ -32,6 +32,7 @@ const authSlice = createSlice({
       state.isAuthenticated = true
       state.isLoading = false
       localStorage.setItem('token', action.payload.token)
+      localStorage.setItem('user', JSON.stringify(action.payload.user))
     },
     logout: (state) => {
       state.user = null
@@ -39,6 +40,7 @@ const authSlice = createSlice({
       state.isAuthenticated = false
       state.isLoading = false
       localStorage.removeItem('token')
+      localStorage.removeItem('user')
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload
