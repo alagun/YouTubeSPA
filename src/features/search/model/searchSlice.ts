@@ -27,7 +27,11 @@ const searchSlice = createSlice({
       state.currentPage = 1
       state.pageTokens = {}
     },
-    setSearchParams: (state, action: PayloadAction<{ maxResults?: number; order?: string }>) => {
+
+    setSearchParams: (state, action: PayloadAction<{
+      maxResults?: number;
+      order?: string;
+    }>) => {
       if (action.payload.maxResults !== undefined) {
         state.maxResults = action.payload.maxResults
       }
@@ -36,18 +40,7 @@ const searchSlice = createSlice({
         state.order = action.payload.order
       }
     },
-    setPageToken: (state, action: PayloadAction<{ page: number; token: string }>) => {
-      state.pageTokens[action.payload.page] = action.payload.token
-    },
-    goToNextPage: (state) => {
-      state.currentPage += 1
-    },
-    goToPrevPage: (state) => {
-      state.currentPage = Math.max(1, state.currentPage - 1)
-    },
-    goToPage: (state, action: PayloadAction<number>) => {
-      state.currentPage = action.payload
-    },
+
     clearSearch: (state) => {
       state.query = ''
       state.currentPage = 1
@@ -55,16 +48,28 @@ const searchSlice = createSlice({
       state.maxResults = 12
       state.order = 'relevance'
     },
+
+    setPageToken: (state, action: PayloadAction<{ page: number; token: string }>) => {
+      state.pageTokens[action.payload.page] = action.payload.token
+    },
+
+    goToNextPage: (state) => {
+      state.currentPage += 1
+    },
+
+    goToPrevPage: (state) => {
+      state.currentPage = Math.max(1, state.currentPage - 1)
+    },
   },
 })
 
 export const {
   setSearchQuery,
   setSearchParams,
+  clearSearch,
   setPageToken,
   goToNextPage,
   goToPrevPage,
-  goToPage,
-  clearSearch,
 } = searchSlice.actions
+
 export default searchSlice.reducer
