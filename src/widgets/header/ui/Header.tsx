@@ -1,4 +1,3 @@
-// widgets/header/ui/Header.tsx
 import React from 'react'
 import { Layout, Menu, Button, Avatar, Dropdown, Space } from 'antd'
 import {
