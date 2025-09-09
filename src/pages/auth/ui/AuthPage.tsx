@@ -1,5 +1,5 @@
-import React from 'react'
-import { Form, Input, Button, Card, Typography, Alert } from 'antd'
+import React, { useState } from 'react'
+import { Form, Input, Button, Card, Typography, Alert, Select } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { Link, useNavigate } from 'react-router-dom'
 import { useLazyGetUserQuery, useLoginMutation } from '../../../shared/api/authApi'
@@ -8,6 +8,20 @@ import { setCredentials, setLoading } from '../../../entities/user/model/authSli
 import { useAppDispatch } from '../../../app/store/store.hooks'
 
 const { Title, Text } = Typography
+const { Option } = Select
+
+const testUsers = [
+  {
+    email: 'alexej.lagun@gmail.com',
+    password: 'registerR1"',
+    label: 'Alexej Lagun',
+  },
+  {
+    email: 'jak.tokd@gmail.com',
+    password: 'registerR1"',
+    label: 'Jak Tokd',
+  },
+]
 
 function removeFirstDot (email: string): string {
   const dotIndex = email.indexOf('.')
@@ -25,6 +39,19 @@ export const AuthPage: React.FC = () => {
   const dispatch = useAppDispatch()
   const [login, { isLoading }] = useLoginMutation()
   const [getUserData] = useLazyGetUserQuery()
+  const [selectedUser, setSelectedUser] = useState<string>('')
+
+  const handleUserChange = (value: string) => {
+    setSelectedUser(value)
+    const user = testUsers.find(u => u.email === value)
+
+    if (user) {
+      form.setFieldsValue({
+        email: user.email,
+        password: user.password,
+      })
+    }
+  }
 
   const onFinish = async (values: { email: string; password: string }) => {
     try {
@@ -43,6 +70,8 @@ export const AuthPage: React.FC = () => {
             email: User?.email ? User.email : 'JaneDoe@example.com', // values.email
             age: User?.age ? User.age : 0,
             gender: User?.gender ? User.gender : 'unknowm',
+            // isAuth: false,
+            isAuth: true,
           },
           token: response.token,
         }))
@@ -81,6 +110,26 @@ export const AuthPage: React.FC = () => {
           </Text>
         </div>
 
+        <div style={{ marginBottom: 20 }}>
+          <Text strong style={{ display: 'block', marginBottom: 8 }}>
+            Выберите тестового пользователя:
+          </Text>
+          <Select
+            value={selectedUser}
+            onChange={handleUserChange}
+            placeholder='Выберите пользователя'
+            style={{ width: '100%' }}
+            size='large'
+          >
+            <Option value=''>Ручной ввод</Option>
+            {testUsers.map(user => (
+              <Option key={user.email} value={user.email}>
+                {user.label}
+              </Option>
+            ))}
+          </Select>
+        </div>
+
         <Form
           form={form}
           name='login'
@@ -88,10 +137,6 @@ export const AuthPage: React.FC = () => {
           layout='vertical'
           className={styles.authForm}
           size='large'
-          initialValues={{
-            email: 'alexej.lagun@gmail.com',
-            password: 'registerR1"',
-          }}
         >
           <Form.Item
             name='email'

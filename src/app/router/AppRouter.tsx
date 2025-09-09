@@ -1,9 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { MainPage } from '../../pages/main/ui/MainPage'
-import { AuthPage } from '../../pages/auth/ui/AuthPage'
 import { PrivateRoute } from '../../shared/ui/PrivateRoute'
-import { RegistrationPage } from '../../pages/registration/ui/RegistrationPage'
-import { NotFoundPage } from '../../pages/not-found'
+import { SavedQueriesPage } from '@/pages/saved'
+import { AuthPage } from '@/pages/auth'
+import { MainPage } from '@/pages/main'
+import { NotFoundPage } from '@/pages/not-found'
+import { RegistrationPage } from '@/pages/registration'
 import App from '../App'
 
 export const AppRouter = createBrowserRouter([
@@ -33,6 +34,14 @@ export const AppRouter = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MainPage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'saved',
+        element: (
+          <PrivateRoute>
+            <SavedQueriesPage />
           </PrivateRoute>
         ),
       },
