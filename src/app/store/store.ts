@@ -3,7 +3,7 @@ import { authApi } from '../../shared/api/authApi'
 import { youtubeApi } from '../../shared/api/youtubeApi'
 import authSlice from '../../entities/user/model/authSlice'
 import searchSlice from '../../features/search/model/searchSlice'
-// import savedQueriesSlice from '../../features/saved-queries/model/savedQueriesSlice';
+import savedQueriesSlice from '@/features/saved-queries/model/savedQueriesSlice'
 
 export const store = configureStore({
   reducer: {
@@ -11,7 +11,7 @@ export const store = configureStore({
     [youtubeApi.reducerPath]: youtubeApi.reducer,
     auth: authSlice,
     search: searchSlice,
-    // savedQueries: savedQueriesSlice,
+    savedQueries: savedQueriesSlice,
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware({
     serializableCheck: {

@@ -1,0 +1,267 @@
+.layout {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.content {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  
+  @media (max-width: 768px) {
+    padding: 16px;
+  }
+  
+  @media (max-width: 576px) {
+    padding: 12px;
+  }
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 24px !important;
+  color: #1890ff;
+  font-weight: 600;
+  
+  @media (max-width: 768px) {
+    font-size: 20px !important;
+    margin-bottom: 16px !important;
+  }
+}
+
+.emptyState {
+  text-align: center;
+  padding: 60px 20px;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px dashed #d9d9d9;
+  
+  h4 {
+    color: #8c8c8c;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  
+  p {
+    color: #bfbfbf;
+    margin: 0;
+    font-size: 14px;
+  }
+  
+  @media (max-width: 576px) {
+    padding: 40px 16px;
+    
+    h4 {
+      font-size: 16px;
+    }
+    
+    p {
+      font-size: 13px;
+    }
+  }
+}
+
+.tableContainer {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+  overflow-x: auto;
+  
+  :global {
+    .ant-table {
+      border-radius: 8px;
+      min-width: 600px;
+      
+      .ant-table-thead > tr > th {
+        background: #fafafa;
+        font-weight: 600;
+        color: #262626;
+        padding: 16px 12px;
+        border-bottom: 1px solid #f0f0f0;
+        white-space: nowrap;
+        
+        &:first-child {
+          border-top-left-radius: 8px;
+        }
+        
+        &:last-child {
+          border-top-right-radius: 8px;
+        }
+      }
+      
+      .ant-table-tbody > tr > td {
+        padding: 12px;
+        border-bottom: 1px solid #f0f0f0;
+        transition: background-color 0.2s ease;
+        
+        &:first-child {
+          font-weight: 500;
+          color: #1890ff;
+        }
+      }
+      
+      .ant-table-tbody > tr:hover > td {
+        background: #fafafa;
+      }
+      
+      .ant-table-tbody > tr:last-child > td {
+        border-bottom: none;
+        
+        &:first-child {
+          border-bottom-left-radius: 8px;
+        }
+        
+        &:last-child {
+          border-bottom-right-radius: 8px;
+        }
+      }
+    }
+  }
+  
+  @media (max-width: 768px) {
+    :global {
+      .ant-table {
+        .ant-table-thead > tr > th,
+        .ant-table-tbody > tr > td {
+          padding: 12px 8px;
+          font-size: 13px;
+        }
+      }
+    }
+  }
+}
+
+.mobileCards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.queryCard {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #f0f0f0;
+  
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cardHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.queryName {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1890ff;
+}
+
+.queryText {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.cardActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  
+  button {
+    flex: 1;
+    min-width: 120px;
+  }
+}
+
+.actionButtons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  
+  @media (max-width: 576px) {
+    flex-direction: column;
+    width: 100%;
+    
+    button {
+      width: 100%;
+      margin: 2px 0;
+    }
+  }
+}
+
+.card {
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  border: 1px solid #f0f0f0;
+  
+  :global {
+    .ant-card-head {
+      border-bottom: 1px solid #f0f0f0;
+      padding: 0 24px;
+      
+      .ant-card-head-title {
+        padding: 16px 0;
+        font-size: 18px;
+        font-weight: 600;
+      }
+      
+      @media (max-width: 768px) {
+        padding: 0 16px;
+        
+        .ant-card-head-title {
+          font-size: 16px;
+          padding: 12px 0;
+        }
+      }
+    }
+    
+    .ant-card-body {
+      padding: 24px;
+      
+      @media (max-width: 768px) {
+        padding: 16px;
+      }
+    }
+  }
+}
+
+.fadeIn {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.responsiveHide {
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.responsiveShow {
+  display: none;
+  
+  @media (max-width: 768px) {
+    display: block;
+  }
+}
